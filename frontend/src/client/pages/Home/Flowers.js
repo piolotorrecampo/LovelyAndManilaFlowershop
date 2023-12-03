@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import FlowerCard from '../../components/FlowerCard';
 
 const Flowers = (props) => {
-  const [isClicked, setIsClicked] = useState(false)
-
   const list = props.list
 
   return (

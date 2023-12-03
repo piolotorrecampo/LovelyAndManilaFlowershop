@@ -10,7 +10,6 @@ export function DataProvider({ children }) {
   const [ocassions, setOcassions] = useState([]);
   const [flowers, setFlowers] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(items))
@@ -58,20 +57,6 @@ export function DataProvider({ children }) {
       }
   }
 
-  const fetchBlogs = async () => {
-    try {
-      const res = await fetch(`/api/blog/`);
-      if (res.ok) {
-        const json = await res.json();
-        setBlogs(json);
-      } else {
-        console.log('Something went wrong');
-      }
-    } catch (error) {
-        console.error(error);
-      }
-  }
-
   const fetchOcassion = async () => {
     try {
       const res = await fetch(`/api/ocassion/`);
@@ -91,7 +76,6 @@ export function DataProvider({ children }) {
     fetchFlowers()
     fetchOcassion()
     fetchCategories()
-    fetchBlogs()
   }, [])
 
   const addToCart = (productId, title, flowerType, price, description, ocassion, category, imageUrl) => {
@@ -129,7 +113,7 @@ export function DataProvider({ children }) {
   }
 
   return (
-    <DataContext.Provider value={{ items, products, flowers, ocassions, categories, blogs, addToCart, emptyCart, removeFromCart}}>
+    <DataContext.Provider value={{ items, products, flowers, ocassions, categories, addToCart, emptyCart, removeFromCart}}>
       {children}
     </DataContext.Provider>
   );

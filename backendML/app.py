@@ -1,6 +1,8 @@
 # Importing required libs
 from flask import Flask, jsonify, request
 from model import preprocess_img, predict_result
+import os 
+os.environ['TF_CPP_MIN_VLOG_LEVEL'] = '0'
 from flask_cors import CORS
 
 # Instantiating flask app
