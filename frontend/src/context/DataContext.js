@@ -4,16 +4,23 @@ const DataContext = createContext();
 
 export function DataProvider({ children }) {
 
-  const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || [])
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || []);
   const [items, setItems] = useState(cartFromLocalStorage);
   const [products, setProducts] = useState([]);
   const [ocassions, setOcassions] = useState([]);
+  const [admins, setAdmins] = useState([]);
   const [flowers, setFlowers] = useState([]);
   const [categories, setCategories] = useState([]);
+  const LoginStateFromLocalStorage = JSON.parse(localStorage.getItem('loginState') || false);
+  const [isLogin, setIsLogin] = useState(LoginStateFromLocalStorage);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(items))
   },[items])
+
+  useEffect(() => {
+    localStorage.setItem('loginState', JSON.stringify(isLogin))
+  },[isLogin])
 
   const fetchProduct = async () => {
     try {
@@ -71,11 +78,26 @@ export function DataProvider({ children }) {
       }
   }
 
+  const fetchAdmins = async () => {
+    try {
+      const res = await fetch(`/api/admin/`);
+      if (res.ok) {
+        const json = await res.json();
+        setAdmins(json);
+      } else {
+        console.log('Something went wrong');
+      }
+    } catch (error) {
+        console.error(error);
+      }
+  }
+
   useEffect(() => {
     fetchProduct()
     fetchFlowers()
     fetchOcassion()
     fetchCategories()
+    fetchAdmins()
   }, [])
 
   const addToCart = (productId, title, flowerType, price, description, ocassion, category, imageUrl) => {
@@ -112,8 +134,17 @@ export function DataProvider({ children }) {
     setItems([]);
   }
 
+  const login = () => {
+    setIsLogin(true);
+  }
+
+  const logout = () => {
+    setIsLogin(false);
+  }
+
+
   return (
-    <DataContext.Provider value={{ items, products, flowers, ocassions, categories, addToCart, emptyCart, removeFromCart}}>
+    <DataContext.Provider value={{ items, products, flowers, ocassions, categories, admins, addToCart, isLogin, login, logout, emptyCart, removeFromCart}}>
       {children}
     </DataContext.Provider>
   );

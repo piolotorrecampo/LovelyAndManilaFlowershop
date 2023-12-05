@@ -1,33 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import DataContext from '../../context/DataContext';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  const { admins, login } = useContext(DataContext)
+
+  console.log(admins);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
+      // Search for the provided username in the list of admin users
+      const adminUser = admins.find((admin) => admin.username === username);
 
-      if (response.ok) {
-        // Successful login logic (redirect, set state, etc.)
-        console.log('Login successful');
-        setError('');
+      if (adminUser) {
+        // Compare the provided password with the stored password
+        if (adminUser.password === password) {
+          // Successful login logic (redirect, set state, etc.)
+          console.log('Login successful');
+          login();
+          setError('');
+          navigate('/admin/orders', { replace: true });
+        } else {
+          // Incorrect password
+          setError('Incorrect password. Please try again.');
+        }
       } else {
-        // Handle failed login
-        const data = await response.json();
-        setError(data.error || 'Login failed. Please try again.');
+        // Username not found
+        setError('Username not found. Please try again.');
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -36,9 +42,12 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full justify-center align-center">
-      <div className="w-2/5">
+    <div className="flex h-screen w-full justify-center items-center">
+      <div className="w-80">
         <form onSubmit={handleLogin}>
+          <h1 className='text-6xl mb-10 text-center leading-20'>
+            Lovely and Manila Flowershop
+          </h1>
           <div className="mb-4">
             <label htmlFor="username" className="block text-gray-700 text-sm font-medium mb-2">
               Username
@@ -72,7 +81,7 @@ const Login = () => {
           </div>
 
           <button
-            type="submit"
+            onClick={(e) => handleLogin(e)}
             className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
           >
             Login

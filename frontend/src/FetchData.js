@@ -257,6 +257,10 @@ export const AddAdmin = (items) => {
   return AddItem('/api/admin', items)
 }
 
+export const PredictImage = (items) => {
+  return AddItem('/api/predict', items)
+}
+
 // Delete Function
 export const DeleteCategory = (id) => {
   return useDeleteItem(`/api/category/${id}`, id);

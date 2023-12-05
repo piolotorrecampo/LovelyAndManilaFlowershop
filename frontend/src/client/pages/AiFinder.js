@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 
 import Footer from '../components/Footer';
-import Filterbar from '../components/Filterbar';
-import FlowerCard from '../components/FlowerCard';
-import flowerImage from '../assets/images/flower.png';
-
 import TopBanner from '../components/Header/TopBanner';
 import LogoBanner from '../components/Header/LogoBanner';
 import Navbar from '../components/Header/Navbar';
@@ -14,53 +10,51 @@ import Button from '../components/Button';
 function AiFinder() {
   const [isPhoto, setIsPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [photo, setPhoto] = useState(null);
   const [flowerPrediction, setFlowerPrediction] = useState();
+  const [imageBase64, setImageBase64] = useState();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]
-    setPhoto(file);
 
     if (file) {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          setIsPhoto(e.target.result)
-        }
-        reader.readAsDataURL(file);
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        setIsPhoto(e.target.result)
+      }
+      reader.readAsDataURL(file)
+      reader.onloadend = () => {
+        setImageBase64(reader.result)
       }
     }
+  }
 
-  const handlePress = async (event) => {
-    event.preventDefault();
-
+  const handlePress = async (e) => {
+    e.preventDefault();
+    const items = { image: imageBase64 };
+    setLoading(true);
+  
     try {
-      setLoading(true);
-      if (!photo) {
-        console.log('No file selected.');
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append('file', photo);
-
-      const response = await fetch('http://localhost:9000/predict', {
+      const res = await fetch('/api/predict', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(items),
       });
-
-      if (!response.ok) {
-        console.error('Error communicating with the Flask API:', response.statusText);
-        return;
+  
+      if (!res.ok) {
+        throw new Error('Failed to predict image');
       }
-
-      const result = await response.json();
-      setFlowerPrediction(result);
-      console.log('Prediction result:', result);
+  
+      const result = await res.json();
+      setFlowerPrediction(result.prediction);
+      console.log(result);
     } catch (error) {
       console.error('Error:', error);
     }
+  
     setLoading(false);
-  }
+  };
 
   return (
     <div>
@@ -124,7 +118,7 @@ function AiFinder() {
           }
           {!loading && flowerPrediction && (
             <div className="px-10 flex-row justify-center align-center">
-              <h4 className="text-2xl text-center">Your photo is most likely a '{flowerPrediction.prediction}'.</h4>
+              <h4 className="text-2xl text-center">Your photo is most likely a '{flowerPrediction}'.</h4>
             </div>
           )}
         </div>
