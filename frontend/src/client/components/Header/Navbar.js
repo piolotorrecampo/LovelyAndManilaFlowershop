@@ -15,10 +15,15 @@ const Navbar = () => {
   const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
   
   return (
-    <nav className="flex justify-center gap-14 text-sm items-center w-full h-9 text-foreground bg-background">
+    <nav className="flex justify-center gap-14 text-sm items-center w-full h-9 text-foreground bg-background xs:h-56 xs:flex-col xs:gap-3">
+      <h1 className='lg:hidden md:hidden text-2xl'>Lovely and Manila Flowershop</h1>
       <NavLink to="/">HOME</NavLink>
-      <NavMenuDropdown title="FLOWERS" items={flowerTitles} />
-      <NavMenuDropdown title="OCASSIONS" items={occasionTitles} />
+      <div className='lg:flex md:flex sm:hidden xs:hidden'>
+        <NavMenuDropdown title="FLOWERS" items={flowerTitles} />
+      </div>
+      <div className='lg:flex md:flex sm:hidden xs:hidden'>
+        <NavMenuDropdown title="OCASSIONS" items={occasionTitles} />
+      </div>
       <NavLink to="/ai-finder">AI-FINDER</NavLink>
       <NavLink to="/about-us">ABOUT US</NavLink>
       <NavLink to="/contact">CONTACT</NavLink>
@@ -28,7 +33,6 @@ const Navbar = () => {
           <NavLink to="/my-cart"><ShoppingCartOutlinedIcon/></NavLink>
           <span className=''>({totalQuantity})</span>
         </div>
-        
       </div>
     </nav>
   )

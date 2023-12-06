@@ -65,8 +65,8 @@ const CrudForms = () => {
       </div>
 
       {isOcassionSelected && ( <OcassionSection pageName='Ocassions' api='ocassion' /> )}
-      {isProductSelected && ( <ProductSection pageName='Product' api='product' /> )}
-      {isFlowerSelected && ( <FlowerSection pageName='Flower' api='flower' /> )}
+      {isProductSelected && ( <ProductSection pageName='Products' api='product' /> )}
+      {isFlowerSelected && ( <FlowerSection pageName='Flowers' api='flower' /> )}
       {isCategorySelected && ( <CategorySection  pageName='Categories' api='ocassion' /> )}
     </div>
   )

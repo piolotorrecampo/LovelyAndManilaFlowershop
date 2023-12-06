@@ -15,7 +15,7 @@ import SubBanner from '../components/Header/SubBanner';
 const FlowerDetails = () => {
   const { identifier } = useParams();
   const [details, setDetails] = useState('');  
-  const { addToCart } = useContext(DataContext)
+  const { addToCart } = useContext(DataContext);
 
   const fetchData = async () => {
     try {
@@ -50,21 +50,21 @@ const FlowerDetails = () => {
         />
       </div>  
       <LogoBanner />
-      <div className='sticky top-8'>
+      <div className='lg:sticky lg:top-8 md:sticky md:top-8'>
         <Navbar />
       </div>
       <SubBanner 
         title={details.title}
         page="product"
       />
-      <div className="mx-40 py-10 flex flex-col justify-center gap-10">
-          <div className="flex flex-row justify-center align-center gap-10">
+      <div className="lg:mx-40 md:mx-20 sm:mx-4 xs:mx-4 py-10 flex flex-col justify-center items-center gap-10">
+          <div className="flex lg:flex-row md:flex-row justify-center align-center gap-10 xs:flex-col sm:flex-col ">
             {details.image && (
-              <img className='w-96 h-96 object-fill overflow-hidden' alt='flowers'
+              <img className='w-96 h-96 object-cover overflow-hidden' alt='flowers'
                 src={details.image.url}
               />
             )}
-            <div className="flex flex-col p-1 gap-3 w-2/3">
+            <div className="flex flex-col p-1 gap-3 w-2/3 xs:w-full sm:w-full xs:gap-9 sm:gap-9 sm:justify-center sm:items-center xs:justify-center xs:items-center">
               <div className="flex flex-col gap-2">
                 <div className="flex flex-col gap-1">
                   <h1 className="text-4xl">{details.title}</h1>

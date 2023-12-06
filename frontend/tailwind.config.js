@@ -20,22 +20,25 @@ module.exports = {
         'more-img': "url('./client/assets/images/more-bg.png')",
         'banner-img': "url('./client/assets/images/subbanner.png')",
       },
-    },
-    screens: {
-      sm: '640px',
-      // => @media (min-width: 640px) { ... }
+      screens: {
+        'xs': {'max': '449px'},
+        // => @media (min-width: 640px) { ... }
 
-      md: '768px',
-      // => @media (min-width: 768px) { ... }
+        'sm': '640px',
+        // => @media (min-width: 640px) { ... }
 
-      lg: '1024px',
-      // => @media (min-width: 1024px) { ... }
+        'md': '768px',
+        // => @media (min-width: 768px) { ... }
 
-      xl: '1280px',
-      // => @media (min-width: 1280px) { ... }
+        'lg': '1024px',
+        // => @media (min-width: 1024px) { ... }
 
-      '2xl': '1536px',
-      // => @media (min-width: 1536px) { ... }
+        'xl': '1280px',
+        // => @media (min-width: 1280px) { ... }
+
+        '2xl': '1536px',
+        // => @media (min-width: 1536px) { ... }
+      }
     },
   },
   darkMode: 'class',

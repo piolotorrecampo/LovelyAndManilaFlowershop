@@ -66,14 +66,14 @@ function AiFinder() {
         />
       </div>  
       <LogoBanner />
-      <div className='sticky top-8'>
+      <div className='lg:sticky lg:top-8 md:sticky md:top-8'>
         <Navbar />
       </div>
       <SubBanner 
         title="AI Finder"
         page="ai-finder"
       />
-      <div className="mx-40 sm:mx-10 py-16 flex flex-col items-center gap-10">
+      <div className="lg:mx-40 md:mx-20 sm:mx-4 xs:mx-4 py-16 xs:py-10 flex flex-col items-center gap-10">
         <div className="flex flex-col gap-5">
           <h2 className="text-5xl text-center">AI Finder</h2>
           <p className="text-center">
@@ -81,7 +81,7 @@ function AiFinder() {
             Intelligence to choose the right flower for you.
           </p>
         </div>
-        <div className="flex flex-row sm:flex-col justify-center gap-10 w-3/6">
+        <div className="flex flex-row sm:flex-col justify-center gap-10 lg:w-3/6 sm:w-full xs:w-full">
           <label htmlFor="dropzone-file" className="overflow-hidden flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover-bg-gray-100 dark-border-gray-600 dark:hover-border-gray-500 dark:hover-bg-gray-600">
             <div
               className={ isPhoto

@@ -17,7 +17,7 @@ const Home = () => {
 
   const { products, ocassions } = useContext(DataContext);
   products.sort((a, b) => b.timestamp - a.timestamp);
-  const recentObjects = products.slice(0, 5);
+  const recentObjects = products.slice(0, 4);
 
   return (
     <div>
@@ -28,8 +28,10 @@ const Home = () => {
           rightContent="example@gmail.com"
         />
       </div>  
-      <LogoBanner />
-      <div className='sticky top-8'>
+      <div className=''>
+        <LogoBanner />
+      </div>
+      <div className='lg:sticky lg:top-8 md:sticky md:top-8'>
         <Navbar />
       </div>
       <Hero/>

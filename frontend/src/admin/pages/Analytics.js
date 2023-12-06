@@ -1,28 +1,69 @@
 import React from 'react';
 import NavbarAdmin from '../components/NavbarAdmin';
-import { Bar } from 'react-chartjs-2'
+import { GetProducts } from '../../FetchData';
 
 const Analytics = () => {
-
+  const products = GetProducts()
 
   return (
     <div>
-      <NavbarAdmin/>
-      <form>
-        <div class="mb-4">
-          <label for="username" class="block text-gray-700 text-sm font-medium mb-2">Username</label>
-          <input type="text" id="username" name="username" class="w-full px-3 py-2 border rounded-md" placeholder="Enter your username" required/>
+      <NavbarAdmin />
+      <div className='flex flex-col items-center justify-center'>
+        <h1 className='py-10 mx-40 text-6xl'>Analytics</h1>
+        <div className="mx-40 relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  Title
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Views
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Add to Cart
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Purchased
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {products ? products.map((item) => (
+                <tr key={item.id} className="hover:bg-gray-100">
+                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {item.title}
+                  </td>
+                  <td className="px-6 py-4">
+                    {item.views}
+                  </td>
+                  <td className="px-6 py-4">
+                    {item.addToCart}
+                  </td>
+                  <td className="px-6 py-4">
+                    {item.purchased}
+                  </td>
+                </tr>
+              )) : 
+                <tr className="hover:bg-gray-100">
+                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <p>---</p>
+                  </td>
+                  <td className="px-6 py-4">
+                    <p>---</p>
+                  </td>
+                  <td className="px-6 py-4">
+                    <p>---</p>
+                  </td>
+                  <td className="px-6 py-4">
+                    <p>---</p>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
         </div>
-
-        <div class="mb-4">
-          <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
-          <input type="password" id="password" name="password" class="w-full px-3 py-2 border rounded-md" placeholder="Enter your password" required/>
-        </div>
-
-        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-          Login
-        </button>
-      </form>
+      </div>
     </div>
   )
 }

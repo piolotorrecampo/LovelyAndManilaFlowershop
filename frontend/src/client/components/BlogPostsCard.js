@@ -1,21 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
-import Button from './Button'
 
 const BlogPostsCard = (props) => {
-  const [isHovered, setIsHovered] = useState(false)
-
-  const handleMouseEnter = () => {
-    setIsHovered(true)
-  }
-
-  const handleMouseLeave = () => {
-    setIsHovered(false)
-  }
-
   return (
     <motion.div
-      className="w-96 p-1 shadow-md"
+      className="w-96 p-1 shadow-md xs:w-4/5 "
       whileHover={{
         boxShadow: '0px 0px 10px 2px rgba(0,0,0,0.25)',
       }}

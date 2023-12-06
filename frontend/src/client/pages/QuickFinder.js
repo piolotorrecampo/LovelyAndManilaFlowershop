@@ -25,14 +25,14 @@ const QuickFinder = () => {
           />
         </div>  
         <LogoBanner />
-        <div className='sticky top-8'>
+        <div className='lg:sticky lg:top-8 md:sticky md:top-8'>
           <Navbar />
         </div>
         <SubBanner 
           title="Quick Finder"
           page="quick-finder"
         />
-        <div className="mx-40 py-16 gap-10 flex flex-col items-center">
+        <div className="lg:mx-40 md:mx-20 sm:mx-4 xs:mx-4 py-16 gap-10 flex flex-col items-center">
           <h1 className="text-5xl">Quick Finder</h1>
           <p className="text-center">
             Quick Finder is your ultimate tool for effortlessly narrowing down our
@@ -42,8 +42,6 @@ const QuickFinder = () => {
           </p>
           <Filterbar />
         </div>
-        <div className='mx-40 pb-16 flex flex-row justify-center gap-5 flex-wrap'>
-      </div>
         <div>
           <Footer />
         </div>

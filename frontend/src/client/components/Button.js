@@ -10,6 +10,7 @@ const Button = (props) => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={props.onClick}
+        disabled={props.disabled}
       >
         {props.title}
       </motion.button>

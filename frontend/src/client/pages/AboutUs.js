@@ -19,14 +19,14 @@ const AboutUs = () => {
         />
       </div>  
       <LogoBanner />
-      <div className='sticky top-8'>
+      <div className='lg:sticky lg:top-8 md:sticky md:top-8'>
         <Navbar />
       </div>
       <SubBanner 
         title="About Us"
         page="about-us"
       />
-      <div className="mx-40 sm:mx-10 py-10 flex flex-col justify-center items-center gap-10">
+      <div className="lg:mx-40 md:mx-20 xs:mx-4 sm:mx-4 py-10 flex flex-col justify-center items-center gap-10">
         <h1 className="text-5xl text-center">The Lovely & Manila</h1>
         <img src={aboutus} alt="" />
         <p className="text-lg">

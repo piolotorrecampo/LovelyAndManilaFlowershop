@@ -19,8 +19,7 @@ const Filterbar = () => {
   const categoriesTitles = categories.map(category => category.title);
   const prices = ['0-499', '500-1000', '1000 and above'];
 
-  const [filteredProducts, setFilteredProducts] = useState(products);
- 
+  const [filteredProducts, setFilteredProducts] = useState(products); 
 
   useEffect(() => {
     const filtered = products.filter((product) => {
@@ -63,7 +62,7 @@ const Filterbar = () => {
   return (
     <div className='flex flex-col justify-center gap-10'>
       <form className="">
-        <nav className="py-4 rounded shadow-lg flex justify-center gap-5 text-sm items-center h-auto text-black border border-black-500">
+        <nav className="py-4 rounded shadow-lg flex lg:flex-row md:flex-row justify-center gap-5 text-sm items-center h-auto text-black border border-black-500 sm:flex-col xs:flex-col">
           <div className="flex flex-col gap-1 justify-center items-center w-32">
             <label className="font-bold">Flowers</label>
             <DropdownMenu
