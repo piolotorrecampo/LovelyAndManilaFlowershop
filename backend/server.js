@@ -7,8 +7,14 @@ const port = process.env.PORT || 5000;
 const cors = require("cors")
 
 const app = express();
-app.use(cors())
 
+mongoose.connect(process.env.MONGO_URI)
+        .then(() => console.log('Successfully connected to database.'))
+        .catch((err) => {
+                console.error(err)
+        });
+
+app.use(cors());
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({extended: false, limit: '50mb'}));
 
@@ -30,6 +36,15 @@ app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/predict', require('./routes/predictRoutes'));
 
 app.use(errorHandler);
+
+if(process.env.NODE_ENV == "production"){
+  app.use(express.static(path.resolve(__dirname, '../frontend/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
+  });
+}
+
 app.listen(port, () => {
     console.log(`Backend server is running at port ${port}`);
 })
