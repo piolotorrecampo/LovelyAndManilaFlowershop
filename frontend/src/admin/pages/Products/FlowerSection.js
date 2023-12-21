@@ -34,21 +34,24 @@ export default function OcassionSection(props) {
     e.preventDefault();
     const items = { title, color, image: imageBase64 };
     setLoading(true);
-  
-    try {
-      const res = await AddFlower(items);
-      console.log(res);
-      alert('added');
-      setPhoto(null)
-      setTitle('')
-      setColor('')
-    } catch (error) {
-      setError(error)
-      console.error('Error:', error);
-    }
+ 
+try {
+    const res = await AddFlower(items);
+    console.log('API Response:', res);
 
-    setLoading(false);
-  };
+    // Check if the response is valid JSON
+    const parsedResponse = JSON.parse(res);
+    console.log('Parsed Response:', parsedResponse);
+
+    alert('added');
+    setPhoto(null);
+    setTitle('');
+    setColor('');
+  } catch (error) {
+    setError(error.message); // Assuming error.message contains a user-friendly error message
+    console.error('Error:', error);
+  }
+}
 
   return (
     <div className="lg:mx-40 md:mx-20 py-10 gap-10 flex items-center flex-col">

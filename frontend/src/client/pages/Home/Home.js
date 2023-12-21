@@ -23,9 +23,9 @@ const Home = () => {
     <div>
       <div className='sticky top-0'>
         <TopBanner
-          leftContent="+63 123 123 1234"
-          centerContent="Open at 7 am to 10 pm"
-          rightContent="example@gmail.com"
+          leftContent="+63 917 3277 116"
+          centerContent="Open at 6 am to 8 pm"
+          rightContent="manilaflowershop@yahoo.com"
         />
       </div>  
       <div className=''>

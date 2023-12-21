@@ -3,8 +3,8 @@ import React, { createContext, useState, useEffect} from 'react';
 const DataContext = createContext();
 
 export function DataProvider({ children }) {
-
-  const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || []);
+  const storedCartData = localStorage.getItem('cart');
+  const cartFromLocalStorage = storedCartData ? JSON.parse(storedCartData) : [];
   const [items, setItems] = useState(cartFromLocalStorage);
   const [products, setProducts] = useState([]);
   const [ocassions, setOcassions] = useState([]);
